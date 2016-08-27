@@ -1,6 +1,13 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
+NAME="Freifunk Nord"
+OPERATOR="Max"
+CHANGELOG="https://bug.freifunk.net/projects/ffnord-admin"
+HOST_PREFIX="nord-gw"
+VPN_NUMBER=0
+DOMAIN="nord.freifunk.net"
+
 #backborts einbauen
 echo "deb http://http.debian.net/debian wheezy-backports main" >>/etc/apt/sources.list
 
@@ -12,24 +19,21 @@ apt-get update && apt-get upgrade && apt-get dist-upgrade
 #MOTD setzen
 rm /etc/motd
 echo "*********************************************************" >>/etc/motd
-echo " Freifunk Community Nord - Gateway $$ " >>/etc/motd
-echo " Betreiber: $$ *" >>/etc/motd
+echo " $NAME - Gateway $NAME " >>/etc/motd
+echo " Hoster: $OPERATOR *" >>/etc/motd
 echo "*******************************************************" >>/etc/motd
 echo " " >>/etc/motd
-echo " Hinweis(e): " >>/etc/motd
-echo " - " >>/etc/motd
-echo " " >>/etc/motd
-echo " Log: " >>/etc/motd
-echo " https://bug.freifunk.net/projects/ffnord-admin " >>/etc/motd
+echo " Changelog: " >>/etc/motd
+echo " $CHANGELOG " >>/etc/motd
 echo " *" >>/etc/motd
-echo " Viel Spaß am Gerät! *" >>/etc/motd
+echo " Happy Hacking! *" >>/etc/motd
 echo "**********************************************************" >>/etc/motd
 
 #Hostname setzen
 hostname nord-gw11
-echo "127.0.1.1 vpn$$.fnord.net nord-gw$$" >>/etc/hosts
+echo "127.0.1.1 vpn$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
 rm /etc/hostname
-echo "nord-gw$$" >>/etc/hostname
+echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 #benötigte Pakete installieren
 apt-get -y install sudo apt-transport-https git tcpdump mtr-tiny vim nano unp mlocate screen cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip
 
