@@ -59,3 +59,4 @@ cd /root
 #USER TODO:
 echo now copy your manifest.pp, key_files and mesh_peerings.yaml to /root
 echo and then start puppet apply --verbose /root/manifest.pp
+echo 'don´t run those scripts without screen sesssion!!!'
