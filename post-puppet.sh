@@ -25,3 +25,7 @@ nameserver 8.8.8.8
 
 EOF
 
+# check if everything is running:
+service fastd restart
+service isc-dhcp-server restart
+check-services
