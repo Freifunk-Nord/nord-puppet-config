@@ -4,11 +4,11 @@
 $VPN_NUMBER=0
 $DOMAIN=ffnord.net
 
-##NGINX
-apt-get install -y nginx
+#NGINX if needed:
+#apt-get install -y nginx
 
-mkdir /opt/www
-sed s/"usr/share/nginx/www;"/"opt/www;"/g -i /etc/nginx/sites-enabled/default
+#mkdir /opt/www
+#sed s~"usr/share/nginx/www;"~"opt/www;"~g -i /etc/nginx/sites-enabled/default
 
 #DNS Server
 echo "dns-search vpn$VPN_NUMBER.$DOMAIN" >>/etc/network/interfaces
