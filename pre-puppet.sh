@@ -57,6 +57,6 @@ chown root:root check-services
 cd /root
 
 #USER TODO:
-echo now copy your manifest.pp, key_files and mesh_peerings.yaml to /root
-echo and then start puppet apply --verbose /root/manifest.pp
+echo 'now copy the files manifest.pp, fastd_secret.key and mesh_peerings.yaml to /root'
+echo 'and then start puppet apply --verbose /root/manifest.pp'
 echo 'don´t run those scripts without screen sesssion!!!'
