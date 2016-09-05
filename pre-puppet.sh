@@ -8,6 +8,7 @@ HOST_PREFIX="nord-gw"
 SUBDOMAIN_PREFIX=vpn
 VPN_NUMBER=0
 DOMAIN="nord.freifunk.net"
+SUDOUSERNAME="maximilian"
 
 #backborts einbauen
 echo "deb http://http.debian.net/debian wheezy-backports main" >>/etc/apt/sources.list
@@ -15,7 +16,8 @@ echo "deb http://http.debian.net/debian wheezy-backports main" >>/etc/apt/source
 #sysupgrade
 apt-get update && apt-get upgrade && apt-get dist-upgrade
 
-#Benutzer hinzufügen
+#add users:
+useradd -U -G sudo -m $SUDOUSERNAME
 
 #MOTD setzen
 rm /etc/motd
