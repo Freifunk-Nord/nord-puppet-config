@@ -5,6 +5,7 @@ NAME="Freifunk Nord"
 OPERATOR="Max"
 CHANGELOG="https://bug.freifunk.net/projects/ffnord-admin"
 HOST_PREFIX="nord-gw"
+SUBDOMAIN_PREFIX=vpn
 VPN_NUMBER=0
 DOMAIN="nord.freifunk.net"
 
@@ -30,8 +31,8 @@ echo " Happy Hacking! *" >>/etc/motd
 echo "**********************************************************" >>/etc/motd
 
 #Hostname setzen
-hostname nord-gw11
-echo "127.0.1.1 vpn$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
+hostname $HOST_PREFIX$VPN_NUMBER
+echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
 rm /etc/hostname
 echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 #benötigte Pakete installieren
