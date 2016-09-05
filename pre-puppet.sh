@@ -57,4 +57,5 @@ chown root:root check-services
 cd /root
 
 #USER TODO:
-#manifest.pp, $keys, mesh_peerings.yaml nach root legen
+echo now copy your manifest.pp, key_files and mesh_peerings.yaml to /root
+echo and then start puppet apply --verbose /root/manifest.pp
