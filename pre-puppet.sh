@@ -52,6 +52,7 @@ cd /usr/local/bin
 wget --no-check-certificate https://raw.githubusercontent.com/Tarnatos/check-service/master/check-services
 chmod +x check-services
 chown root:root check-services
+sed -i s/=ffki/=fmdk/g /usr/local/bin/check-services
 
 #zurück zu root
 cd /root
