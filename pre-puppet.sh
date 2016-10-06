@@ -40,26 +40,26 @@ echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 #benötigte Pakete installieren
 apt-get -y install sudo apt-transport-https bash-completion haveged git tcpdump mtr-tiny vim nano unp mlocate screen cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
 
-#REBOOT bei Kernel Panic
+#REBOOT on Kernel Panic
 echo "kernel.panic = 10" >>/etc/sysctl.conf
 
-#puppet Module installieren
+#puppet modules install
 apt-get -y install --no-install-recommends puppet
 puppet module install puppetlabs-stdlib && puppet module install puppetlabs-apt --version 1.5.1 && puppet module install puppetlabs-vcsrepo && puppet module install saz-sudo && puppet module install torrancew-account
 cd /etc/puppet/modules
 git clone https://github.com/ffnord/ffnord-puppet-gateway ffnord
 
-#check-services Script installieren
+#check-services script install
 cd /usr/local/bin
 wget --no-check-certificate https://raw.githubusercontent.com/Tarnatos/check-service/master/check-services
 chmod +x check-services
 chown root:root check-services
-sed -i s/=ffki/=fmdk/g /usr/local/bin/check-services
+sed -i s/=ffki/=ffnord/g /usr/local/bin/check-services
 
-#zurück zu root
+# back in /root
 cd /root
 
 #USER TODO:
-echo 'now copy the files manifest.pp, fastd_secret.key and mesh_peerings.yaml to /root'
-echo 'and then start puppet apply --verbose /root/manifest.pp'
-echo 'don´t run those scripts without screen sesssion!!!'
+echo 'now copy the files manifest.pp and mesh_peerings.yaml to /root and make sure /root/fastd_secret.key exists'
+echo 'don´t run the script without screen sesssion!!!'
+echo 'start screen, then start puppet apply --verbose /root/manifest.pp'
