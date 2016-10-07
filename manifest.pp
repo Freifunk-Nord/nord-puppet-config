@@ -14,7 +14,7 @@ ffnord::mesh { 'mesh_ffnord':
       , mesh_as => "65187"
       , mesh_mac  => "fe:ed:be:ef:ff:$$"
       , vpn_mac  => "fe:ed:be:ff:ff:$$"
-      , mesh_ipv6 => "2a03:2267:4e6f:7264::fd$$/64"
+      , mesh_ipv6 => "fdda:fee6:0187::fd$$/64"
       , mesh_ipv4  => "10.187.$$$.$$$/17"
       , range_ipv4 => "10.187.0.0/16"
       , mesh_mtu     => "1280"
