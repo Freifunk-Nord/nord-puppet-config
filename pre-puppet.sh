@@ -45,7 +45,7 @@ echo "kernel.panic = 10" >>/etc/sysctl.conf
 
 #puppet modules install
 apt-get -y install --no-install-recommends puppet
-puppet module install puppetlabs-stdlib && puppet module install puppetlabs-apt --version 1.5.1 && puppet module install puppetlabs-vcsrepo && puppet module install saz-sudo && puppet module install torrancew-account
+puppet module install puppetlabs-stdlib && puppet module install puppetlabs-apt --version 1.5.1 && puppet module install puppetlabs-vcsrepo --version 1.3.2 && puppet module install saz-sudo && puppet module install torrancew-account
 cd /etc/puppet/modules
 git clone https://github.com/ffnord/ffnord-puppet-gateway ffnord
 
