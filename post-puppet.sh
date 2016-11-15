@@ -4,6 +4,7 @@
 VPN_NUMBER=0
 DOMAIN=nord.freifunk.net
 TLD=ffnord
+IP6PREFIX=2a03:2267:4e6f:7264
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
@@ -31,17 +32,21 @@ cat >> /etc/radvd.conf << EOF
 interface br-$TLD
 {
  AdvSendAdvert on;
- AdvDefaultLifetime 0; # Here
+ AdvDefaultLifetime 0; # New
  IgnoreIfMissing on;
  MaxRtrAdvInterval 200;
 
- prefix fda1:384a:74de:4242:0000:0000:0000:0000/64
+ prefix $IP6PREFIX:0000:0000:0000:0000/64
  {
-   AdvPreferredLifetime 14400; # Here
-   AdvValidLifetime 86400; # Here
+   AdvPreferredLifetime 14400; # New
+   AdvValidLifetime 86400; # New
  };
-
- RDNSS fda1:384a:74de:4242::ff0$VPN_NUMBER
+ prefix fdda:fee6:0187:0000:0000:0000:0000:0000/64
+  {
+    AdvPreferredLifetime 14400; # New
+    AdvValidLifetime 86400; # New
+  };
+ RDNSS $IP6PREFIX::fd0$VPN_NUMBER
  {
  };
 
@@ -51,7 +56,7 @@ interface br-$TLD
  };
 };
 EOF
-cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-ffki.conf
+cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-$TLD.conf
 
 # check if everything is running:
 service fastd restart
