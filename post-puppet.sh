@@ -12,7 +12,7 @@ TLD=ffnord
 #sed s~"usr/share/nginx/www;"~"opt/www;"~g -i /etc/nginx/sites-enabled/default
 
 #DNS Server
-echo "dns-search vpn$VPN_NUMBER.$DOMAIN" >>/etc/network/interfaces
+sed -i .bak "/eth0 inet static/a \  dns-search vpn$VPN_NUMBER.$DOMAIN" >>/etc/network/interfaces
 
 rm /etc/resolv.conf
 cat >> /etc/resolv.conf <<-EOF
