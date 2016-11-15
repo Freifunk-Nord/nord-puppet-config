@@ -61,5 +61,7 @@ cd /root
 
 #USER TODO:
 echo 'now copy the files manifest.pp and mesh_peerings.yaml to /root and make sure /root/fastd_secret.key exists'
-echo 'don´t run the script without screen sesssion!!!'
+echo '#########################################################################'
+echo '########### don´t run the script without screen sesssion!!! #############'
+echo '#########################################################################'
 echo 'start screen, then start puppet apply --verbose /root/manifest.pp'
