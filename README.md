@@ -26,3 +26,8 @@ follow instructions at the end of the script. **make sure you are in a screen se
     puppet apply --verbose /root/gateway.pp
     build-firewall
     bash post-puppet.sh
+
+#### 5. weitere sudo user anlegen
+
+    adduser newuser
+    adduser newuser sudo
