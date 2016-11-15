@@ -9,6 +9,7 @@ SUBDOMAIN_PREFIX=vpn
 VPN_NUMBER=0
 DOMAIN="nord.freifunk.net"
 SUDOUSERNAME="maximilian"
+TLD=ffnord
 
 #backborts einbauen
 echo "deb http://http.debian.net/debian wheezy-backports main" >>/etc/apt/sources.list
@@ -54,7 +55,7 @@ cd /usr/local/bin
 wget --no-check-certificate https://raw.githubusercontent.com/Tarnatos/check-service/master/check-services
 chmod +x check-services
 chown root:root check-services
-sed -i s/=ffki/=ffnord/g /usr/local/bin/check-services
+sed -i s/=ffki/=$TLD/g /usr/local/bin/check-services
 
 # uncomment and add aliases
 sed -i '/alias/s/^# //g' /root/.bashrc
