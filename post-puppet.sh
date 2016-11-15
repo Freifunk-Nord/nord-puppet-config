@@ -3,7 +3,7 @@
 
 VPN_NUMBER=0
 DOMAIN=nord.freifunk.net
-COMMUNITY_TLD=ffnord
+TLD=ffnord
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
@@ -14,22 +14,21 @@ COMMUNITY_TLD=ffnord
 #DNS Server
 echo "dns-search vpn$VPN_NUMBER.$DOMAIN" >>/etc/network/interfaces
 
-rm /etc/resolv.conf 
-cat >> /etc/resolv.conf << EOF
-domain ffnord
-search ffnord
-nameserver 127.0.0.1
-nameserver 62.141.32.5
-nameserver 62.141.32.4
-nameserver 62.141.32.3
-nameserver 8.8.8.8
-
+rm /etc/resolv.conf
+cat >> /etc/resolv.conf <<-EOF
+  domain $TLD
+  search $TLD
+  nameserver 127.0.0.1
+  nameserver 62.141.32.5
+  nameserver 62.141.32.4
+  nameserver 62.141.32.3
+  nameserver 8.8.8.8
 EOF
 
 mv /etc/radvd.conf /etc/radvd.conf.bak
 cat >> /etc/radvd.conf << EOF
-# managed for interface br-$COMMUNITY_TLD
-interface br-$COMMUNITY_TLD
+# managed for interface br-$TLD
+interface br-$TLD
 {
  AdvSendAdvert on;
  AdvDefaultLifetime 0; # Here
