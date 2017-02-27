@@ -1,7 +1,17 @@
 class { 'ffnord::params':
-  router_id => "10.187.$$$.$$$",
-  icvpn_as => "65187",
-  wan_devices => ['eth0'],
+  router_id => "10.187.$$$.$$$",  # The id of this router, probably the ipv4 address
+                                  # of the mesh device of the providing community
+  icvpn_as => "65187",            # The as of the providing community
+  wan_devices => ['eth0']         # An array of devices which should be in the wan zone
+
+  wmem_default => 87380,          # Define the default socket send buffer
+  wmem_max     => 12582912,       # Define the maximum socket send buffer
+  rmem_default => 87380,          # Define the default socket recv buffer
+  rmem_max     => 12582912,       # Define the maximum socket recv buffer
+  
+  gw_control_ips => "217.70.197.1 89.27.152.1 138.201.16.163 8.8.8.8", # Define target to ping against for function check
+
+  max_backlog  => 5000,           # Define the maximum packages in buffer
   include_bird4 => false,
   maintenance => 0,
   #debian_mirror => "http://repo.myloc.de/mirrors/ftp.de.debian.org/debian/";
@@ -25,7 +35,7 @@ ffnord::mesh { 'mesh_ffnord':
       , fastd_peers_git => 'https://github.com/Freifunk-Nord/nord-gw-peers.git'
 
       , dhcp_ranges => ['10.187.$$$.2 10.187.$$$.254'] 
-      , dns_servers => ['10.187.$$$.1']
+      , dns_servers => ['10.187.$$$.$$$']               # should be the same as $router_id
 }
 
 class {'ffnord::vpn::provider::hideio':
