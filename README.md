@@ -72,5 +72,6 @@ follow instructions at the end of the script. **make sure you are in a screen se
 
     > maintenance off && service ntp start && batctl -m bat-ffnord gw server 100/100 && check-services
 
-    Now the supernode should forward traffic directly. Make sure that you have disabled the check-gateway scripts and other vpn watchdogs in your crontabs
+    Now the supernode should forward traffic directly.
+    Make sure that you have disabled the check-gateway scripts and other vpn watchdogs in your crontabs
 
