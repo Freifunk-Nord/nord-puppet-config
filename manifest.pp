@@ -2,7 +2,7 @@ class { 'ffnord::params':
   router_id => "10.187.$$$.$$$",  # The id of this router, probably the ipv4 address
                                   # of the mesh device of the providing community
   icvpn_as => "65187",            # The as of the providing community
-  wan_devices => ['eth0']         # An array of devices which should be in the wan zone
+  wan_devices => ['eth0'],        # An array of devices which should be in the wan zone
 
   wmem_default => 87380,          # Define the default socket send buffer
   wmem_max     => 12582912,       # Define the maximum socket send buffer
@@ -19,23 +19,21 @@ class { 'ffnord::params':
 # aus https://github.com/ffnord/site-nord/blob/master/site.conf
 # und https://github.com/freifunk/icvpn-meta/blob/master/nord
 ffnord::mesh { 'mesh_ffnord':
-        mesh_name => "Freifunk Nord"
-      , mesh_code => "ffnord"
-      , mesh_as => "65187"
-      , mesh_mac  => "fe:ed:be:ef:ff:$$"
-      , vpn_mac  => "fe:ed:be:ff:ff:$$"
-      , mesh_ipv6 => "2a03:2267:4e6f:7264::fd$$/64"
-      , mesh_ipv4  => "10.187.$$$.$$$/17"
-      , range_ipv4 => "10.187.0.0/16"
-      , mesh_mtu     => "1280"
-      , mesh_peerings    => "/root/mesh_peerings.yaml"
-
-      , fastd_secret => "/root/nord-gw$$-fastd-secret.key"
-      , fastd_port   => 10050
-      , fastd_peers_git => 'https://github.com/Freifunk-Nord/nord-gw-peers.git'
-
-      , dhcp_ranges => ['10.187.$$$.2 10.187.$$$.254'] 
-      , dns_servers => ['10.187.$$$.$$$']               # should be the same as $router_id
+    mesh_name => "Freifunk Nord"
+  , mesh_code => "ffnord"
+  , mesh_as => "65187"
+  , mesh_mac  => "fe:ed:be:ef:ff:$$"
+  , vpn_mac  => "fe:ed:be:ff:ff:$$"
+  , mesh_ipv6 => "2a03:2267:4e6f:7264::fd$$/64"
+  , mesh_ipv4  => "10.187.$$$.$$$/17"
+  , range_ipv4 => "10.187.0.0/16"
+  , mesh_mtu     => "1280"
+  , mesh_peerings    => "/root/mesh_peerings.yaml"
+  , fastd_secret => "/root/nord-gw$$-fastd-secret.key"
+  , fastd_port   => 10050
+  , fastd_peers_git => 'https://github.com/Freifunk-Nord/nord-gw-peers.git'
+  , dhcp_ranges => ['10.187.$$$.2 10.187.$$$.254'] 
+  , dns_servers => ['10.187.$$$.$$$']               # should be the same as $router_id
 }
 
 class {'ffnord::vpn::provider::hideio':
@@ -50,12 +48,12 @@ ffnord::named::zone {
 }
 
 ffnord::icvpn::setup {
-                'nordgw$$':
-                icvpn_as => 65187,
-                icvpn_ipv4_address => "10.207.$$$.$$$",
-                icvpn_ipv6_address => "fec0::a:cf:$$$:$$$",
-                icvpn_exclude_peerings     => [Nord],
-                tinc_keyfile       => "/root/nord-vpn$$-icvpn-rsa_key.priv"
+  'nordgw$$':
+  icvpn_as => 65187,
+  icvpn_ipv4_address => "10.207.$$$.$$$",
+  icvpn_ipv6_address => "fec0::a:cf:$$$:$$$",
+  icvpn_exclude_peerings     => [Nord],
+  tinc_keyfile       => "/root/nord-vpn$$-icvpn-rsa_key.priv"
 }
 
 class {
