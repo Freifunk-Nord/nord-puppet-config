@@ -75,3 +75,7 @@ follow instructions at the end of the script. **make sure you are in a screen se
     Now the supernode should forward traffic directly.
     Make sure that you have disabled the check-gateway scripts and other vpn watchdogs in your crontabs
 
+#### 5. weitere sudo user anlegen
+
+    adduser newuser
+    adduser newuser sudo
