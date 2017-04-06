@@ -4,7 +4,7 @@
 VPN_NUMBER=0
 DOMAIN=nord.freifunk.net
 TLD=ffnord
-IP6PREFIX=2a03:2267:4e6f:7264
+IP6PREFIX=fdda:fee6:187:0
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
