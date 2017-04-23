@@ -1,18 +1,18 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-NAME="Freifunk Nord"
-OPERATOR="Max"
-CHANGELOG="https://bug.freifunk.net/projects/ffnord-admin"
-HOST_PREFIX="nord-gw"
-SUBDOMAIN_PREFIX=vpn
-VPN_NUMBER=0
-DOMAIN="nord.freifunk.net"
-SUDOUSERNAME="maximilian"
-TLD=ffnord
+NAME="Freifunk Nordheide"
+OPERATOR="heini66"
+CHANGELOG=""
+HOST_PREFIX="gw"
+SUBDOMAIN_PREFIX="gw"
+VPN_NUMBER="00"
+DOMAIN="nordheide.freifunk.net"
+SUDOUSERNAME="heini66"
+TLD=ffnh
 
 #backborts einbauen
-echo "deb http://http.debian.net/debian wheezy-backports main" >>/etc/apt/sources.list
+echo "deb http://http.debian.net/debian jessie-backports main" >>/etc/apt/sources.list
 
 #sysupgrade
 apt-get update && apt-get upgrade && apt-get dist-upgrade
@@ -33,12 +33,14 @@ echo " *" >>/etc/motd
 echo " Happy Hacking! *" >>/etc/motd
 echo "**********************************************************" >>/etc/motd
 
+#OVH
 #Hostname setzen
-hostname $HOST_PREFIX$VPN_NUMBER
-echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
-rm /etc/hostname
-echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
-#benötigte Pakete installieren
+#hostname $HOST_PREFIX$VPN_NUMBER
+#echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
+#rm /etc/hostname
+#echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
+
+#benoetigte Pakete installieren
 apt-get -y install sudo apt-transport-https bash-completion haveged git tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
 
 #REBOOT on Kernel Panic
@@ -54,27 +56,12 @@ puppet module install torrancew-account --version 0.1.0
 cd /etc/puppet/modules
 git clone https://github.com/ffnord/ffnord-puppet-gateway ffnord
 
-#check-services script install
-cd /usr/local/bin
-wget --no-check-certificate https://raw.githubusercontent.com/Tarnatos/check-service/master/check-services
-chmod +x check-services
-chown root:root check-services
-sed -i s/=ffki/=$TLD/g /usr/local/bin/check-services
-
-# add aliases
-cat <<-EOF>> /root/.bashrc
-  export LS_OPTIONS='--color=auto'
-  eval" \`dircolors\`"
-  alias ls='ls \$LS_OPTIONS'
-  alias ll='ls \$LS_OPTIONS -lah'
-  alias l='ls \$LS_OPTIONS -lA'
-  alias grep="grep --color=auto"
-  alias ..="cd .."
-EOF
-
-
 # back in /root
 cd /root
+
+echo load the ip_tables and ip_conntrack module
+modprobe ip_conntrack
+echo ip_conntrack >> /etc/modules
 
 #USER TODO:
 echo 'now copy the files manifest.pp and mesh_peerings.yaml to /root and make sure /root/fastd_secret.key exists'

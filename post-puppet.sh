@@ -1,10 +1,10 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-VPN_NUMBER=0
-DOMAIN=nord.freifunk.net
-TLD=ffnord
-IP6PREFIX=2a03:2267:4e6f:7264
+VPN_NUMBER="00"
+#DOMAIN=nord.freifunk.net
+TLD=ffnh
+IP6PREFIX=fd8f:14c7:d318
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
@@ -13,18 +13,18 @@ IP6PREFIX=2a03:2267:4e6f:7264
 #sed s~"usr/share/nginx/www;"~"opt/www;"~g -i /etc/nginx/sites-enabled/default
 
 #DNS Server
-sed -i .bak "/eth0 inet static/a \  dns-search vpn$VPN_NUMBER.$DOMAIN" /etc/network/interfaces
+#sed -i .bak "/eth0 inet static/a \  dns-search vpn$VPN_NUMBER.$DOMAIN" /etc/network/interfaces
 
-rm /etc/resolv.conf
-cat >> /etc/resolv.conf <<-EOF
-  domain $TLD
-  search $TLD
-  nameserver 127.0.0.1
-  nameserver 62.141.32.5
-  nameserver 62.141.32.4
-  nameserver 62.141.32.3
-  nameserver 8.8.8.8
-EOF
+#rm /etc/resolv.conf
+#cat >> /etc/resolv.conf <<-EOF
+#  domain $TLD
+#  search $TLD
+#  nameserver 127.0.0.1
+#  nameserver 62.141.32.5
+#  nameserver 62.141.32.4
+#  nameserver 62.141.32.3
+#  nameserver 8.8.8.8
+#EOF
 
 mv /etc/radvd.conf /etc/radvd.conf.bak
 cat >> /etc/radvd.conf << EOF
@@ -36,17 +36,12 @@ interface br-$TLD
  IgnoreIfMissing on;
  MaxRtrAdvInterval 200;
 
- prefix $IP6PREFIX:0000:0000:0000:0000/64
+ prefix $IP6PREFIX:0000:0000:0000:0000:0000/64
  {
    AdvPreferredLifetime 14400; # New
    AdvValidLifetime 86400; # New
  };
- prefix fdda:fee6:0187:0000:0000:0000:0000:0000/64
-  {
-    AdvPreferredLifetime 14400; # New
-    AdvValidLifetime 86400; # New
-  };
- RDNSS $IP6PREFIX::fd0$VPN_NUMBER
+ RDNSS $IP6PREFIX::fd$VPN_NUMBER
  {
  };
 
@@ -61,4 +56,4 @@ cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-$TLD.conf
 # check if everything is running:
 service fastd restart
 service isc-dhcp-server restart
-check-services
+ln -s /etc/puppet/modules/ffnord/files/usr/local/bin/check-services /root/check-services
