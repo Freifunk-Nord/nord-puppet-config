@@ -47,7 +47,7 @@ class {'ffnord::vpn::provider::pia':
 }
 
 ffnord::named::zone {
-  "ffnh": zone_git => "https://github.com/freifunk-nordheide/nordheide-zone.git", exclude_meta => 'ffnh';
+  "nordheide": zone_git => "https://github.com/freifunk-nordheide/nordheide-zone.git", exclude_meta => 'ffnh';
 }
 
 ffnord::icvpn::setup {
