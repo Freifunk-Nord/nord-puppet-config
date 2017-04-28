@@ -50,10 +50,11 @@ interface br-$TLD
  {
  };
 
- route fc00::/7  # this block
- {
-   AdvRouteLifetime 1200;
- };
+ # only if icvpn tinc
+ #route fc00::/7  # this block
+ #{
+ #  AdvRouteLifetime 1200;
+ #};
 };
 EOF
 cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-$TLD.conf
