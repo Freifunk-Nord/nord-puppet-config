@@ -54,7 +54,7 @@ and adapt all needed settings to the new gateway
 ### 17. run checkgateway script. if it returns without an error, dudue, you're done with this job!!!
     check-gateway
 
-#### 18. create addtitional user and garant root to them
+### 18. create addtitional user and garant root to them
 
     adduser newuser
     adduser newuser sudo
