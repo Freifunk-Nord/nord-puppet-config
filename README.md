@@ -1,6 +1,7 @@
 # Install scripts for a Freifunk Nordheide Gateway
+
 ## First, make shure your system is debian jessie, system ist up to date. git has to be installed.
-## a screen session is required. 
+## A screen session is required. 
 
 ### 1. copy this file to the root home folder:
     cp mesh_peerings.yaml /root/
