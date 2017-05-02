@@ -34,7 +34,7 @@ and adapt all needed settings to the new gateway
 ### 10. build the firewall
     build-firewall
     
-### 11. resart the vpn connection
+### 11. restart the vpn connection
     service openvpn restart
     
 ### 12. edit /etc/ffnord and insert an known pingable host. eg 8.8.8.8 @ GW_CONTROL_IP
