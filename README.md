@@ -43,7 +43,7 @@ and adapt all needed settings to the new gateway
 ### 13. exit maintenance mode
     maintenance off
     
-### 14. run checkgateway script. if it returns without an error, dudue, you're done with this job!!!
+### 14. run checkgateway script. if it returns without an error, dude, you're done with this job!!!
     check-gateway
 
 ### 15. create addtitional user and garant root to them
