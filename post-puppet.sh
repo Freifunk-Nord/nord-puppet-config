@@ -13,18 +13,19 @@ IP6PREFIX=2a03:2267:4e6f:7264
 #sed s~"usr/share/nginx/www;"~"opt/www;"~g -i /etc/nginx/sites-enabled/default
 
 #DNS Server
-sed -i .bak "/eth0 inet static/a \  dns-search vpn$VPN_NUMBER.$DOMAIN" /etc/network/interfaces
+# Dies Knallte bei OVH:
+# sed -i .bak "/eth0 inet static/a \  dns-search vpn$VPN_NUMBER.$DOMAIN" /etc/network/interfaces
 
-rm /etc/resolv.conf
-cat >> /etc/resolv.conf <<-EOF
-  domain $TLD
-  search $TLD
-  nameserver 127.0.0.1
-  nameserver 62.141.32.5
-  nameserver 62.141.32.4
-  nameserver 62.141.32.3
-  nameserver 8.8.8.8
-EOF
+#rm /etc/resolv.conf
+#cat >> /etc/resolv.conf <<-EOF
+#  domain $TLD
+#  search $TLD
+#  nameserver 127.0.0.1
+#  nameserver 62.141.32.5
+#  nameserver 62.141.32.4
+#  nameserver 62.141.32.3
+#  nameserver 8.8.8.8
+#EOF
 
 mv /etc/radvd.conf /etc/radvd.conf.bak
 cat >> /etc/radvd.conf << EOF
@@ -35,6 +36,7 @@ interface br-$TLD
  AdvDefaultLifetime 0; # New
  IgnoreIfMissing on;
  MaxRtrAdvInterval 200;
+ UnicastOnly on;
 
  prefix $IP6PREFIX:0000:0000:0000:0000/64
  {
