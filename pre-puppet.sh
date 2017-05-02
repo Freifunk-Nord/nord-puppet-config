@@ -33,19 +33,20 @@ echo " *" >>/etc/motd
 echo " Happy Hacking! *" >>/etc/motd
 echo "**********************************************************" >>/etc/motd
 
-# set Hostname
+#Hostname setzen
 hostname $HOST_PREFIX$VPN_NUMBER
 echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
-rm /etc/hostname
+mv /etc/hostname /var/tmp/hostname-bak
 echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
-# iinstall needed packages
-apt-get -y install sudo apt-transport-https bash-completion haveged git tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
+
+# install needed packages
+apt-get -y install sudo apt-transport-https git
+
+# optional pre installed to speed up the setup:
+apt-get -y install bash-completion haveged sshguard tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
 
 #not needed packages from standard OVH template
-apt-get -y remove nginx nginx-full
-
-#REBOOT on Kernel Panic
-echo "kernel.panic = 10" >>/etc/sysctl.conf
+apt-get -y remove nginx nginx-full exim mutt
 
 #puppet modules install
 apt-get -y install --no-install-recommends puppet
@@ -57,12 +58,8 @@ puppet module install torrancew-account --version 0.1.0
 cd /etc/puppet/modules
 git clone https://github.com/ffnord/ffnord-puppet-gateway ffnord
 
-#check-services script install
-cd /usr/local/bin
-wget --no-check-certificate https://raw.githubusercontent.com/Tarnatos/check-service/master/check-services
-chmod +x check-services
-chown root:root check-services
-sed -i s/=ffki/=$TLD/g /usr/local/bin/check-services
+# symlink check-install script
+ln -s /etc/puppet/modules/ffnord/files/usr/local/bin/check-services /root/check-services
 
 # add aliases
 cat <<-EOF>> /root/.bashrc
@@ -75,9 +72,12 @@ cat <<-EOF>> /root/.bashrc
   alias ..="cd .."
 EOF
 
-
 # back in /root
 cd /root
+
+echo load the ip_tables and ip_conntrack module
+modprobe ip_conntrack
+echo ip_conntrack >> /etc/modules
 
 #USER TODO:
 echo 'now copy the files manifest.pp and mesh_peerings.yaml to /root and make sure /root/fastd_secret.key exists'
