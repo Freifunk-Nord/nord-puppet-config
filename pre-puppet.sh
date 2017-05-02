@@ -11,7 +11,7 @@ DOMAIN="nordheide.freifunk.net"
 SUDOUSERNAME="heini66"
 TLD=ffnh
 
-#backborts einbauen
+#backports einbauen
 echo "deb http://http.debian.net/debian jessie-backports main" >>/etc/apt/sources.list
 
 #sysupgrade
@@ -40,8 +40,11 @@ echo "**********************************************************" >>/etc/motd
 #rm /etc/hostname
 #echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 
-#benoetigte Pakete installieren
-apt-get -y install sudo apt-transport-https bash-completion haveged git tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
+# install needed packages
+apt-get -y install sudo apt-transport-https git
+
+# optional pre installed to speed up the setup:
+apt-get -y install bash-completion haveged tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
 
 #REBOOT on Kernel Panic
 echo "kernel.panic = 10" >>/etc/sysctl.conf
@@ -55,6 +58,17 @@ puppet module install saz-sudo --version 4.1.0 && \
 puppet module install torrancew-account --version 0.1.0
 cd /etc/puppet/modules
 git clone https://github.com/ffnord/ffnord-puppet-gateway ffnord
+
+# add aliases
+cat <<-EOF>> /root/.bashrc
+  export LS_OPTIONS='--color=auto'
+  eval" \`dircolors\`"
+  alias ls='ls \$LS_OPTIONS'
+  alias ll='ls \$LS_OPTIONS -lah'
+  alias l='ls \$LS_OPTIONS -lA'
+  alias grep="grep --color=auto"
+  alias ..="cd .."
+EOF
 
 # back in /root
 cd /root
