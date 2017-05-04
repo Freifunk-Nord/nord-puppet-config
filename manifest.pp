@@ -15,7 +15,7 @@ class { 'ffnord::params':
   include_bird4 => false,
   maintenance => 0,
 
-  $batman_version = 15,            # B.A.T.M.A.N. adv version
+  $batman_version => 15,            # B.A.T.M.A.N. adv version
 }
 # aus https://github.com/ffnord/site-nord/blob/master/site.conf
 # und https://github.com/freifunk/icvpn-meta/blob/master/nord
