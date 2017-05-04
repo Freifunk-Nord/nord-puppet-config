@@ -31,9 +31,12 @@ ffnord::mesh { 'mesh_ffnord':
   , range_ipv4 => "10.187.0.0/16"
   , mesh_mtu     => "1280"
   , mesh_peerings    => "/root/mesh_peerings.yaml"
+  
   , fastd_secret => "/root/nord-gw$$-fastd-secret.key"
   , fastd_port   => 10050
   , fastd_peers_git => 'https://github.com/Freifunk-Nord/nord-gw-peers.git'
+  , fastd_verify=> 'true'                               # set this to 'true' to accept all fastd keys without verification
+  
   , dhcp_ranges => ['10.187.$$$.2 10.187.$$$.254'] 
   , dns_servers => ['10.187.$$$.$$$']               # should be the same as $router_id
 }
