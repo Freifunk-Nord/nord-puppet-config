@@ -35,6 +35,7 @@ ffnord::mesh { 'mesh_ffnh':
   , fastd_secret => "/root/gw00-fastd-secret.key"	
   , fastd_port   => 10050
   , fastd_peers_git => 'https://github.com/freifunk-nordheide/nordheide-peers.git'	# this will be pulled automatically during puppet apply
+  #, fastd_verify=> 'true'                    # set this to 'true' to accept all fastd keys without verification
 
   , dhcp_ranges => ['10.71.0.2 10.71.1.254'] 	# the whole net is 10.71.0.0 - 10.71.63.255 
 						# so take one 32rd of this range but don't give out the ip of the gw itself
