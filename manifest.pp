@@ -16,7 +16,7 @@ class { 'ffnord::params':
   maintenance => 0,
   #debian_mirror => "http://repo.myloc.de/mirrors/ftp.de.debian.org/debian/";
   
-  $batman_version => 15,            # B.A.T.M.A.N. adv version
+  batman_version => 15,            # B.A.T.M.A.N. adv version
 }
 # aus https://github.com/ffnord/site-nord/blob/master/site.conf
 # und https://github.com/freifunk/icvpn-meta/blob/master/nord
