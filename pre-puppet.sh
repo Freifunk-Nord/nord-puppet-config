@@ -43,7 +43,7 @@ echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 apt-get -y install sudo apt-transport-https git
 
 # optional pre installed to speed up the setup:
-apt-get -y install bash-completion haveged sshguard tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all
+apt-get -y install bash-completion haveged sshguard tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all ccze ncdu
 
 #not needed packages from standard OVH template
 apt-get -y remove nginx nginx-full exim mutt
