@@ -69,6 +69,9 @@ cat <<-EOF>> /root/.bashrc
   alias ll='ls \$LS_OPTIONS -lah'
   alias l='ls \$LS_OPTIONS -lA'
   alias grep="grep --color=auto"
+  alias nano="nano -Si"
+  # let us only use aptitude on gateways
+  alias apt-get='sudo aptitude'
   alias ..="cd .."
 EOF
 
