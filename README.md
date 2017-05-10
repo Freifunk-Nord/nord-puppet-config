@@ -4,6 +4,8 @@
 ### 1. copy this file to the root home folder:
 
     cp mesh_peerings.yaml /root/
+ 
+`mesh_peerings.yaml` must be extended with each gateway. On existing gateways the new ips must be added to the file `/etc/bird/bird6.conf.d/ffnord.conf`.
 
 ### 2. create the file with the fastd private key
 
@@ -12,7 +14,8 @@
 ### 3. copy this file to the root home folder:
 
     cp manifest.pp /root/gateway.pp
-and adapt all needed settings to the new gateway
+    
+Every gateway needs its own manifest file. Adapt all needed settings to the new gateway. `$$$` are placeholders for the values on that gateway which have to be adapted by hand: IPs, filenames, etc.
 
 #### 4. start the pre, puppet and post script
 
