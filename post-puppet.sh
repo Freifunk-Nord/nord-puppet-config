@@ -27,35 +27,6 @@ IP6PREFIX=fd42:eb49:c0b5:4242
 #  nameserver 8.8.8.8
 #EOF
 
-mv /etc/radvd.conf /etc/radvd.conf.bak
-cat >> /etc/radvd.conf << EOF
-# managed for interface br-$TLD
-interface br-$TLD
-{
- AdvSendAdvert on;
- AdvDefaultLifetime 0; # New
- IgnoreIfMissing on;
- MaxRtrAdvInterval 200;
- UnicastOnly on;
-
- prefix $IP6PREFIX:0000:0000:0000:0000/64
- {
-   AdvPreferredLifetime 14400; # New
-   AdvValidLifetime 86400; # New
- };
- RDNSS $IP6PREFIX::fd0$VPN_NUMBER
- {
- };
-
- # only if icvpn tinc
- #route fc00::/7  # this block
- #{
- #  AdvRouteLifetime 1200;
- #};
-};
-EOF
-cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-$TLD.conf
-
 # check if everything is running:
 service fastd restart
 service isc-dhcp-server restart
