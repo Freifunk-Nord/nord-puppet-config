@@ -2,20 +2,20 @@
 #https://github.com/ffnord/ffnord-puppet-gateway
 
 NAME="Freifunk Nord"
-OPERATOR="Max"
+OPERATOR="Freifunk Nord"
 CHANGELOG="https://bug.freifunk.net/projects/ffnord-admin"
-HOST_PREFIX="nord-gw"
+HOST_PREFIX="0.gw"
 SUBDOMAIN_PREFIX=vpn
 VPN_NUMBER=0
 DOMAIN="nord.freifunk.net"
-SUDOUSERNAME="maximilian"
+SUDOUSERNAME="debian"
 TLD=ffnord
 
 #backborts einbauen
-echo "deb http://http.debian.net/debian wheezy-backports main" >>/etc/apt/sources.list
+echo "deb http://http.debian.net/debian jessie-backports main" >>/etc/apt/sources.list
 
 #sysupgrade
-apt-get update && apt-get upgrade && apt-get dist-upgrade
+apt-get update && apt-get dist-upgrade && apt-get upgrade
 
 #add users:
 useradd -U -G sudo -m $SUDOUSERNAME
@@ -34,10 +34,10 @@ echo " Happy Hacking! *" >>/etc/motd
 echo "**********************************************************" >>/etc/motd
 
 #Hostname setzen
-hostname $HOST_PREFIX$VPN_NUMBER
-echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
-mv /etc/hostname /var/tmp/hostname-bak
-echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
+#hostname $HOST_PREFIX$VPN_NUMBER
+#echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
+#mv /etc/hostname /var/tmp/hostname-bak
+#echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 
 # install needed packages
 apt-get -y install sudo apt-transport-https git
@@ -59,12 +59,12 @@ cd /etc/puppet/modules
 git clone https://github.com/ffnord/ffnord-puppet-gateway ffnord
 
 # symlink check-install script
-ln -s /etc/puppet/modules/ffnord/files/usr/local/bin/check-services /root/check-services
+ln -s /etc/puppet/modules/ffnord/files/usr/local/bin/check-services /usr/local/bin/check-services
 
 # add aliases
 cat <<-EOF>> /root/.bashrc
   export LS_OPTIONS='--color=auto'
-  eval" \`dircolors\`"
+  eval " \`dircolors\`"
   alias ls='ls \$LS_OPTIONS'
   alias ll='ls \$LS_OPTIONS -lah'
   alias l='ls \$LS_OPTIONS -lA'

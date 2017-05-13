@@ -4,7 +4,7 @@
 VPN_NUMBER=0
 DOMAIN=nord.freifunk.net
 TLD=ffnord
-IP6PREFIX=2a03:2267:4e6f:7264
+IP6PREFIX=fd42:eb49:c0b5:4242
 
 #NGINX, if needed to serve the firmware for the auto-updater
 #apt-get install -y nginx
@@ -43,11 +43,6 @@ interface br-$TLD
    AdvPreferredLifetime 14400; # New
    AdvValidLifetime 86400; # New
  };
- prefix fdda:fee6:0187:0000:0000:0000:0000:0000/64
-  {
-    AdvPreferredLifetime 14400; # New
-    AdvValidLifetime 86400; # New
-  };
  RDNSS $IP6PREFIX::fd0$VPN_NUMBER
  {
  };
