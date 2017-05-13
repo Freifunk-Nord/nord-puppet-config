@@ -27,7 +27,17 @@ IP6PREFIX=fd42:eb49:c0b5:4242
 #  nameserver 8.8.8.8
 #EOF
 
+# alfred make install fix
+cd /opt/alfred
+make install CONFIG_ALFRED_CAPABILITIES=n
+
+# alfred fix for /bin/sh
+sed -i 's/( //;s/ )//g' /etc/ffnord
+service alfred restart
+
+# firewall config
+build-firewall
+
 # check if everything is running:
-service fastd restart
-service isc-dhcp-server restart
 check-services
+echo maintenance off if needed !
