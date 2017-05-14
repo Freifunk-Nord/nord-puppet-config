@@ -1,5 +1,7 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
+# adapt IPV6 first!
+# do dpkg-reconfigure tzdata
 
 NAME="Freifunk Nord"
 OPERATOR="Freifunk Nord"
