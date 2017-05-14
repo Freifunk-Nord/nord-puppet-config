@@ -1,7 +1,7 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-VPN_NUMBER=0
+VPN_NUMBER=4
 DOMAIN=nord.freifunk.net
 TLD=ffnord
 IP6PREFIX=fd42:eb49:c0b5:4242
@@ -28,12 +28,15 @@ IP6PREFIX=fd42:eb49:c0b5:4242
 #EOF
 
 # alfred make install fix
-cd /opt/alfred
-make install CONFIG_ALFRED_CAPABILITIES=n
+#cd /opt/alfred
+#make install CONFIG_ALFRED_CAPABILITIES=n
 
 # alfred fix for /bin/sh
 sed -i 's/( //;s/ )//g' /etc/ffnord
 service alfred restart
+cd
+puppet apply --verbose $VPN_NUMBER.gateway.pp
+sed -i 's/( //;s/ )//g' /etc/ffnord
 
 # firewall config
 build-firewall
@@ -45,7 +48,7 @@ echo adapt hostname in the OVH-template /etc/cloud/templates/hosts.debian.tmpl a
 echo add ipv6 to  /etc/network/interfaces, for example:
 echo '
 iface eth0 inet6 static
-       address 2001:41d0:401:2100::1:f01
+       address https://github.com/Freifunk-Nord/nord-puppet-config
        netmask 128
        post-up /sbin/ip -6 route add 2001:41d0:401:2100::1 dev eth0
        post-up /sbin/ip -6 route add default via 2001:41d0:401:2100::1 dev eth0

@@ -4,9 +4,9 @@
 NAME="Freifunk Nord"
 OPERATOR="Freifunk Nord"
 CHANGELOG="https://bug.freifunk.net/projects/ffnord-admin"
-HOST_PREFIX="0.gw"
+HOST_PREFIX="nord-"
 SUBDOMAIN_PREFIX=vpn
-VPN_NUMBER=0
+VPN_NUMBER=4
 DOMAIN="nord.freifunk.net"
 SUDOUSERNAME="debian"
 TLD=ffnord
@@ -34,10 +34,11 @@ echo " Happy Hacking! *" >>/etc/motd
 echo "**********************************************************" >>/etc/motd
 
 #Hostname setzen
-#hostname $HOST_PREFIX$VPN_NUMBER
+hostname $HOST_PREFIX$VPN_NUMBER
 #echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
-#mv /etc/hostname /var/tmp/hostname-bak
-#echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
+rm /etc/hostname
+touch /etc/hostname
+echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 
 # install needed packages
 apt-get -y install sudo apt-transport-https git
@@ -81,6 +82,11 @@ cd /root
 echo load the ip_tables and ip_conntrack module
 modprobe ip_conntrack
 echo ip_conntrack >> /etc/modules
+
+#SSH config
+rm /etc/ssh/sshd_config
+cp /opt/nord-puppet-config/sshd_config /etc/ssh/sshd_config
+service sshd restart
 
 #USER TODO:
 echo 'now copy the files manifest.pp and mesh_peerings.yaml to /root and make sure /root/fastd_secret.key exists'
