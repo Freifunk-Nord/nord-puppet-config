@@ -23,6 +23,23 @@ build-firewall
 #fastd ovh config
 cd /etc/fastd/ffnord-mvpn/
 git clone https://github.com/Freifunk-Nord/nord-gw-peers-ovh
+touch /usr/local/bin/update-fastd-gw
+cat <<-EOF>> /usr/local/bin/update-fastd-gw
+#!/bin/bash
+
+cd /etc/fastd/ffnord-mvpn/nord-gw-peers-ovh
+git pull -q
+EOF
+chmod +x /usr/local/bin/update-fastd-gw
+
+#online script
+touch /usr/local/bin/online
+cat<<-EOF>> /usr/local/bin/online
+#!/bin/bash
+
+maintenance off && service ntp start && batctl -m bat-ffnord gw server 100/100 && check-services
+EOF
+chmod +x /usr/local/bin/online
 
 # check if everything is running:
 check-services
