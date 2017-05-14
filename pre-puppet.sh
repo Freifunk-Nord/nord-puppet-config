@@ -17,9 +17,6 @@ echo "deb http://http.debian.net/debian jessie-backports main" >>/etc/apt/source
 #sysupgrade
 apt-get update && apt-get dist-upgrade && apt-get upgrade
 
-#add users:
-useradd -U -G sudo -m $SUDOUSERNAME
-
 #MOTD setzen
 rm /etc/motd
 echo "*********************************************************" >>/etc/motd
@@ -70,7 +67,6 @@ cat <<-EOF>> /root/.bashrc
   alias ll='ls \$LS_OPTIONS -lah'
   alias l='ls \$LS_OPTIONS -lA'
   alias grep="grep --color=auto"
-  alias nano="nano -Si"
   # let us only use aptitude on gateways
   alias apt-get='sudo aptitude'
   alias ..="cd .."
@@ -88,8 +84,43 @@ rm /etc/ssh/sshd_config
 cp /opt/nord-puppet-config/sshd_config /etc/ssh/sshd_config
 service sshd restart
 
+cat <<-EOF>> ~/.ssh/config
+Host gitlab.com
+HostName gitlab.com
+Port 22
+User root
+IdentityFile ~/.ssh/ffnord-gitlab.rsa
+EOF
+
+#online script
+touch /usr/local/bin/online
+cat <<-EOF>> /usr/local/bin/online
+#!/bin/bash
+
+maintenance off && service ntp start && batctl -m bat-ffnord gw server 100/100 && check-services
+EOF
+chmod +x /usr/local/bin/online
+
+#OVH network config
+cat <<-EOF>> /etc/network/interfaces
+
+iface eth0 inet6 static
+       address
+       netmask 128
+       post-up /sbin/ip -6 route add 2001:41d0:401:2100::1 dev eth0
+       post-up /sbin/ip -6 route add default via 2001:41d0:401:2100::1 dev eth0
+       pre-down /sbin/ip -6 route del default via 2001:41d0:401:2100::1 dev eth0
+       pre-down /sbin/ip -6 route del 2001:41d0:401:2100::1 dev eth0
+
+auto eth1
+allow-hotplug eth1
+iface eth1 inet dhcp
+EOF
+
+
 #USER TODO:
 echo 'now copy the files manifest.pp and mesh_peerings.yaml to /root and make sure /root/fastd_secret.key exists'
+echo 'adapt IPV6 adress'
 echo '####################################################################################'
 echo '########### don´t run the following scripts without screen sesssion!!! #############'
 echo '####################################################################################'
