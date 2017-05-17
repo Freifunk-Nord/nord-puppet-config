@@ -13,10 +13,6 @@ cd
 puppet apply --verbose $VPN_NUMBER.gateway.pp
 sed -i 's/( //;s/ )//g' /etc/ffnord
 
-#OVH VRACK iptables config
-sed -i 's/wan-input/wan-input -i eth0/g' /etc/iptables.d/500-Allow-fastd-ffnord
-echo "ip46tables -A wan-input -i eth1 -p udp -m udp --dport 10050 -j ACCEPT -m comment --comment 'fastd-ffnord'" >>/etc/iptables.d/500-Allow-fastd-ffnord
-
 # firewall config
 build-firewall
 
