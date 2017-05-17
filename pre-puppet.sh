@@ -99,7 +99,7 @@ touch /usr/local/bin/online
 cat <<-EOF>> /usr/local/bin/online
 #!/bin/bash
 
-maintenance off && service ntp start && batctl -m bat-ffnord gw server 100/100 && check-services
+maintenance off && service ntp start && batctl -m bat-ffnord gw server 100000/100000 && check-services
 EOF
 chmod +x /usr/local/bin/online
 
@@ -107,7 +107,7 @@ chmod +x /usr/local/bin/online
 cat <<-EOF>> /etc/network/interfaces
 
 iface eth0 inet6 static
-       address
+       address 2001:41d0:401:2000::2:f0bd
        netmask 128
        post-up /sbin/ip -6 route add 2001:41d0:401:2100::1 dev eth0
        post-up /sbin/ip -6 route add default via 2001:41d0:401:2100::1 dev eth0
