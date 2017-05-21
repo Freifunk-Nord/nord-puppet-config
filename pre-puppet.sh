@@ -8,7 +8,7 @@ OPERATOR="Freifunk Nord"
 CHANGELOG="https://bug.freifunk.net/projects/ffnord-admin"
 HOST_PREFIX="nord-"
 SUBDOMAIN_PREFIX=vpn
-VPN_NUMBER=4
+VPN_NUMBER=11
 DOMAIN="nord.freifunk.net"
 SUDOUSERNAME="debian"
 TLD=ffnord
@@ -40,7 +40,7 @@ touch /etc/hostname
 echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
 
 # install needed packages
-apt-get -y install sudo apt-transport-https git
+apt-get -y install sudo apt-transport-https git nload
 
 # optional pre installed to speed up the setup:
 apt-get -y install bash-completion haveged sshguard tcpdump mtr-tiny vim nano unp mlocate screen tmux cmake build-essential libcap-dev pkg-config libgps-dev python3 ethtool lsb-release zip locales-all ccze ncdu
