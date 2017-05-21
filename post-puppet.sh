@@ -1,7 +1,7 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-VPN_NUMBER=4
+VPN_NUMBER=11
 DOMAIN=nord.freifunk.net
 TLD=ffnord
 IP6PREFIX=fd42:eb49:c0b5:4242
@@ -18,12 +18,12 @@ build-firewall
 
 #fastd ovh config
 cd /etc/fastd/ffnord-mvpn/
-git clone https://github.com/Freifunk-Nord/nord-gw-peers-ovh
+git clone https://github.com/Freifunk-Nord/nord-gw-peers-ovh backbone
 touch /usr/local/bin/update-fastd-gw
 cat <<-EOF>> /usr/local/bin/update-fastd-gw
 #!/bin/bash
 
-cd /etc/fastd/ffnord-mvpn/nord-gw-peers-ovh
+cd /etc/fastd/ffnord-mvpn/backbone
 git pull -q
 EOF
 chmod +x /usr/local/bin/update-fastd-gw
