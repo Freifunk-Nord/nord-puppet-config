@@ -62,7 +62,7 @@ ffnord::icvpn::setup {
 }
 
 class {
-  ['ffnord::etckeeper','ffnord::rsyslog','ffnord::alfred']:
+  ['ffnord::etckeeper','ffnord::rsyslog','ffnord::mosh','ffnord::alfred']:
 }
 
 #class {
