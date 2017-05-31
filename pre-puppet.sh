@@ -72,6 +72,10 @@ cat <<-EOF>> /root/.bashrc
   # let us only use aptitude on gateways
   alias apt-get='sudo aptitude'
   alias ..="cd .."
+  # history settings
+  HISTCONTROL=ignoreboth
+  HISTSIZE=10000
+  HISTFILESIZE=200000
 EOF
 
 # back in /root
