@@ -72,6 +72,8 @@ cat <<-EOF>> /root/.bashrc
   # let us only use aptitude on gateways
   alias apt-get='sudo aptitude'
   alias ..="cd .."
+  # set nano to (S=)smooth scrolling and (i=)autoindent (T=)2 tabs (E=)as spaces
+  alias nano='nano -S -i -T2 -E'
   # history settings
   HISTCONTROL=ignoreboth
   HISTSIZE=10000
