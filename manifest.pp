@@ -76,6 +76,6 @@ class {
 
 # Useful packages
 package {
-  ['vim','tcpdump','dnsutils','realpath','screen','htop','mlocate','tig']:
+  ['vim','tcpdump','dnsutils','realpath','screen','htop','mlocate','tig','unattended-upgrades']:
      ensure => installed;
 }
