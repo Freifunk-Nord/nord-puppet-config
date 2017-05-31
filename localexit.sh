@@ -31,7 +31,6 @@ EOF
 # nano /etc/network/interfaces.d/ffnord-bridge
 
 # remove check-gateway crontab
-# disable vpn-watchdogs
 
 # reboot machine and run:
 # maintenance off && service ntp start && batctl -m bat-ffnord gw server 100/100 && check-services
