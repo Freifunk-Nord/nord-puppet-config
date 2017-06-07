@@ -115,10 +115,10 @@ cat <<-EOF>> /etc/network/interfaces
 iface eth0 inet6 static
        address 2001:41d0:401:2000::2:f0bd
        netmask 128
-       post-up /sbin/ip -6 route add 2001:41d0:401:2100::1 dev eth0
-       post-up /sbin/ip -6 route add default via 2001:41d0:401:2100::1 dev eth0
-       pre-down /sbin/ip -6 route del default via 2001:41d0:401:2100::1 dev eth0
-       pre-down /sbin/ip -6 route del 2001:41d0:401:2100::1 dev eth0
+       post-up /sbin/ip -6 route add 2001:41d0:401:2000::1 dev eth0
+       post-up /sbin/ip -6 route add default via 2001:41d0:401:2000::1 dev eth0
+       pre-down /sbin/ip -6 route del default via 2001:41d0:401:2000::1 dev eth0
+       pre-down /sbin/ip -6 route del 2001:41d0:401:2000::1 dev eth0
 
 auto eth1
 allow-hotplug eth1
